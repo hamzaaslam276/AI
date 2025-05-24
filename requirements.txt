@@ -1,0 +1,9 @@
+streamlit
+opencv-python
+pytesseract
+easyocr
+pandas
+numpy
+openai
+Pillow
+openai==0.28
