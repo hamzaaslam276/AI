@@ -7,6 +7,9 @@ import openai
 from PIL import Image
 import re
 import streamlit as st
+from openai import OpenAI
+
+client = OpenAI(api_key="your_api_key_here")
 
 openai.api_key = st.secrets["OPENAI_API_KEY"]
 
@@ -48,6 +51,27 @@ def generate_explanations(df):
         )
         try:
             response = openai.ChatCompletion.create(
+                model="gpt-3.5-turbo",
+                messages=[{"role": "user", "content": prompt}],
+                max_tokens=150
+            )
+            explanation = response.choices[0].message.content.strip()
+        except Exception as e:
+            explanation = f"Error generating explanation: {e}"
+        explanations.append({
+            "Test Name": row['Test Name'],
+            "Explanation": explanation
+        })
+    return explanationsdef generate_explanations(df):
+    explanations = []
+    for _, row in df.iterrows():
+        prompt = (
+            f"Explain in simple terms what it means if the patient's {row['Test Name']} is "
+            f"{row['Measured Value']} {row['Unit']} given the normal range is "
+            f"{row['Normal Low']}–{row['Normal High']} {row['Unit']}."
+        )
+        try:
+            response = client.chat.completions.create(
                 model="gpt-3.5-turbo",
                 messages=[{"role": "user", "content": prompt}],
                 max_tokens=150
