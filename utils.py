@@ -6,7 +6,10 @@ import pandas as pd
 import openai
 from PIL import Image
 import re
-client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
+import streamlit as st
+
+openai.api_key = st.secrets["OPENAI_API_KEY"]
+
 reader = easyocr.Reader(['en'])
 
 def preprocess_image(image):
