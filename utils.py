@@ -9,9 +9,7 @@ import re
 import streamlit as st
 from openai import OpenAI
 
-client = OpenAI(api_key="your_api_key_here")
-
-openai.api_key = st.secrets["OPENAI_API_KEY"]
+client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 
 reader = easyocr.Reader(['en'])
 
