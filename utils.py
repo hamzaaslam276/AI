@@ -35,7 +35,7 @@ def structure_data(text):
     return pd.DataFrame(data)
 
 def generate_explanations(df):
-    openai.api_key = "sk-...TSgA" 
+    
     explanations = []
     for _, row in df.iterrows():
         prompt = (
