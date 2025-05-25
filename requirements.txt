@@ -1,9 +1,8 @@
 streamlit
-opencv-python
+opencv-python-headless
 pytesseract
 easyocr
-pandas
 numpy
+pandas
 openai
 Pillow
-openai==0.28
